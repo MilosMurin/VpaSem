@@ -45,10 +45,8 @@ public class JsonResponseController {
         try {
             Room room = getRoom(Integer.parseInt(number));
             if (room != null) {
-                FilterProvider filters
-                        = new SimpleFilterProvider().addFilter(
-                        "myFilter",
-                        SimpleBeanPropertyFilter.filterOutAllExcept("price"));
+                FilterProvider filters = new SimpleFilterProvider().addFilter(
+                        "myFilter", SimpleBeanPropertyFilter.filterOutAllExcept("price"));
                 return new ObjectMapper().writer(filters).writeValueAsString(room.getRoomType());
             }
         } catch (NumberFormatException | JsonProcessingException e) {

@@ -3,6 +3,7 @@ package me.milos.murin.reservationservice.controllers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import me.milos.murin.reservationservice.models.PaymentId;
 import me.milos.murin.reservationservice.models.Price;
 import me.milos.murin.reservationservice.models.Reservation;
 import me.milos.murin.reservationservice.models.RoomReservation;
@@ -62,8 +63,17 @@ public class PostController {
         }
 
         // send price and recieve id
-        Long payId = 0L; // generate from payment service
-        // TODO: Retrieve payId
+        Mono<String> res = webClientBuilder.build()
+                .get()
+                .uri("http://localhost:8001/payCreate/" + price)
+                .retrieve()
+                .bodyToMono(String.class);
+        Long payId = null; // generate from payment service
+        try {
+            payId = objectMapper.readValue(res.toString(), PaymentId.class).getId();
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
 
         Reservation reservation = new Reservation(name, email, phone, payId, false);
         reservationRepository.save(reservation);
@@ -76,7 +86,7 @@ public class PostController {
         // user selects date
         // user selects rooms (do in js and make a json list out of that)
         // user inputs personal info
-        // user sneds post request with all that info
+        // user sends post request with all that info
 
         return "";
     }
