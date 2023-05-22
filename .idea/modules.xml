@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/VPASemestralWork.iml" filepath="$PROJECT_DIR$/VPASemestralWork.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../down/room-service/room-service.iml" filepath="$PROJECT_DIR$/../../../down/room-service/room-service.iml" />
     </modules>
   </component>
 </project>
