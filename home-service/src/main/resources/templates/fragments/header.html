@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark" th:fragment="header">
+    <a class="navbar-brand" href="http://localhost:8006/">
+        <img alt="logo" class="logo" src="" th:src="@{/images/severka-logo.png}">
+    </a>
+    <button class="navbar-toggler" data-bs-target="#collapsibleNavbar" data-bs-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+            <a class="nav-link text-white" href="http://localhost:8006/">Reservations</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" href="http://localhost:8006/">Rooms</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" href="http://localhost:8006/contact">Contact</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" href="">
+                User: <b>Name</b>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" href="">Log out</a>
+        </li>
+    </ul>
+</nav>
