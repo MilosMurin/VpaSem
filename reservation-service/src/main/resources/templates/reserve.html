@@ -16,32 +16,50 @@
                 <form method="post" th:action="${id}">
                     <div class="row mt-4">
                         <div class="col text-end">
-                            <label for="cardNumber">Number:</label>
+                            <label for="name">Name:</label>
                         </div>
                         <div class="col text-start">
-                            <input id="cardNumber" name="cardNumber" th:value="${cardNumber}" type="text"/>
+                            <input id="name" name="name" th:value="${name}" type="text"/>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col text-end">
+                            <label for="email">Email:</label>
+                        </div>
+                        <div class="col text-start">
+                            <input id="email" name="email" th:value="${email}" type="email"/>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col text-end">
+                            <label for="dateFrom">Date from:</label>
+                        </div>
+                        <div class="col text-start">
+                            <input id="dateFrom" name="dateFrom" th:value="${dateFrom}" type="date"/>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col text-end">
+                            <label for="dateTo">Date to:</label>
+                        </div>
+                        <div class="col text-start">
+                            <input id="dateTo" name="dateTo" th:value="${dateTo}" type="date"/>
                         </div>
                     </div>
 
 
                     <div class="row mt-4">
                         <div class="col text-end">
-                            <label for="expiration">Expiration:</label>
+                            <label for="phone">Phone:</label>
                         </div>
                         <div class="col text-start">
-                            <input id="expiration" name="expiration" th:value="${expiration}" type="month"/>
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col text-end">
-                            <label for="cvv">CVV:</label>
-                        </div>
-                        <div class="col text-start">
-                            <input id="cvv" name="cvv" th:value="${cvv}" type="number"/>
+                            <input id="phone" name="phone" th:value="${phone}" type="tel"/>
                         </div>
                     </div>
 
-                    <button class="btn btn-warning mt-4" type="submit">Submit</button>
+                    <button class="btn btn-warning mt-4" type="submit">Reserve</button>
                 </form>
             </div>
         </div>

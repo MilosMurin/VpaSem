@@ -39,6 +39,10 @@ public class Room {
         return "http://localhost:8003/room/" + id;
     }
 
+    public String getReserverURL() {
+        return "http://localhost:8004/" + id;
+    }
+
     @Override
     public String toString() {
         return String.format("Room no. %d: %d", id, roomType.getId());

@@ -28,7 +28,7 @@ public class RoomInfoController {
         try {
             Optional<Room> room = roomRepository.findById(Integer.parseInt(number));
             if (room.isPresent()) {
-                model.addAttribute("room", room.get().getRoomType());
+                model.addAttribute("room", room.get());
             } else {
                 return new ModelAndView("redirect:http://localhost:8006/error");
             }

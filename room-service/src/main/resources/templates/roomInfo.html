@@ -7,22 +7,23 @@
 <div th:utext="${header}"></div>
 
 
-<img alt="" class="backImage" src="" th:if="${room.getName() == 'Apartment'}" th:src="@{/images/apartman.jpg}">
-<img alt="" class="backImage" src="" th:if="${room.getName() == 'Double'}" th:src="@{/images/double.jpg}">
-<img alt="" class="backImage" src="" th:if="${room.getName() == 'Double extra'}" th:src="@{/images/doubleExtra.jpg}">
-<img alt="" class="backImage" src="" th:if="${room.getName() == 'Family'}" th:src="@{/images/family.jpg}">
+<img alt="" class="backImage" src="" th:if="${room.getRoomType().getName() == 'Apartment'}"
+     th:src="@{/images/apartman.jpg}">
+<img alt="" class="backImage" src="" th:if="${room.getRoomType().getName() == 'Double'}" th:src="@{/images/double.jpg}">
+<img alt="" class="backImage" src="" th:if="${room.getRoomType().getName() == 'Double extra'}"
+     th:src="@{/images/doubleExtra.jpg}">
+<img alt="" class="backImage" src="" th:if="${room.getRoomType().getName() == 'Family'}" th:src="@{/images/family.jpg}">
 
 <div class="container-fluid text-center">
     <div class="mt-5 row d-flex align-items-center justify-content-center">
         <div class="col-6 d-flex align-items-center justify-content-center">
             <div class="myCard mb-3 mt-5 w-75 p-5 text-white">
                 <h1>Room <span th:text="${num}"></span></h1>
-                <h2><span th:text="${room.getName()}"></span></h2>
-                <h3><span class="text-warning" th:text="${room.getPriceString()}"></span></h3>
-                <h3>Beds: <span th:text="${room.getBedsString()}"></span></h3>
-                <p>Info: <span th:text="${room.getInfo()}"></span></p>
-                <a href="http://localhost:8006/">
-                    <!--                    TODO: link to reserve this-->
+                <h2><span th:text="${room.getRoomType().getName()}"></span></h2>
+                <h3><span class="text-warning" th:text="${room.getRoomType().getPriceString()}"></span></h3>
+                <h3>Beds: <span th:text="${room.getRoomType().getBedsString()}"></span></h3>
+                <p>Info: <span th:text="${room.getRoomType().getInfo()}"></span></p>
+                <a href="" th:href="${room.getReserverURL()}">
                     <button class="btn btn-primary mt-4" type="submit">Reserve</button>
                 </a>
             </div>
