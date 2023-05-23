@@ -1,7 +1,5 @@
 package me.milos.murin.paymentservice.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
@@ -12,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+import reactor.core.publisher.Mono;
 
 import java.util.Optional;
 
@@ -23,9 +23,11 @@ public class PaymentController {
     @Autowired
     private PaymentRepostitory paymentRepostitory;
 
+    @Autowired
+    private WebClient.Builder webClientBuilder;
 
     @GetMapping("/payCreate/{amount}")
-    public @ResponseBody String createPayment(@PathVariable String amount) {
+    public ModelAndView createPayment(@PathVariable String amount) {
 
         try {
             Integer i = Integer.parseInt(amount);
@@ -34,42 +36,53 @@ public class PaymentController {
             FilterProvider filters = new SimpleFilterProvider().addFilter(
                     "myFilter", SimpleBeanPropertyFilter.filterOutAllExcept("id"));
 
-            return new ObjectMapper().writer(filters).writeValueAsString(payment);
+            ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
+            mav.addObject("id", payment.getId());
+
+            return mav;
         } catch (NumberFormatException e) {
-            return "Not a number"; // TODO: redirect to error page
-        } catch (JsonProcessingException e) {
-            return "Error when JSON processing"; // TODO: redirect to error page
+            return new ModelAndView("redirect:http://localhost:8006/error");
         }
     }
 
     @GetMapping("/pay/{id}")
-    public String pay(Model model, @PathVariable String id) { // external redirect
+    public ModelAndView pay(Model model, @PathVariable String id) { // external redirect
 
         Optional<Payment> payment;
         try {
             payment = paymentRepostitory.findById(Long.parseLong(id));
         } catch (NumberFormatException e) {
-            throw new RuntimeException(e);
+            return new ModelAndView("redirect:http://localhost:8006/error");
         }
 
         // TODO: Screen with card fill up and stuff
         if (payment.isPresent()) {
+            if (!payment.get().getPaid()) {
+                Mono<String> res = webClientBuilder.build()
+                        .get()
+                        .uri("http://localhost:8006/header/pay")
+                        .retrieve()
+                        .bodyToMono(String.class);
 
-            model.addAttribute("amount", payment.get().getSum().toString() + "€");
+                model.addAttribute("amount", payment.get().getSum().toString() + "€");
+                model.addAttribute("header", res.block());
+                res = webClientBuilder.build()
+                        .get()
+                        .uri("http://localhost:8006/style/Pay")
+                        .retrieve()
+                        .bodyToMono(String.class);
+                model.addAttribute("style", res.block());
 
-            return "payment";
+                return new ModelAndView("payment");
+            }
         }
 
-        return "payment";// TODO: Redirect to home service
+        return new ModelAndView("redirect:http://localhost:8006/");
     }
 
     @GetMapping("/")
     public ModelAndView home() { // internal redirect
-
-        // TODO: Redirect to home service
-
-        String serviceUrl = "http://localhost:8003/room/212";
-        return new ModelAndView("redirect:" + serviceUrl);
+        return new ModelAndView("redirect:http://localhost:8006/");
     }
 
 }

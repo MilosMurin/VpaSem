@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Hello</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:utext="${style}">
+    <title>Payment</title>
 </head>
 <body>
-<h1 th:text="You need to pay ${amount}"></h1>
+<div th:utext="${header}"></div>
+
+
+<!--<h1 th:text="You need to pay ${amount}"></h1>-->
 
 </body>
 </html>
