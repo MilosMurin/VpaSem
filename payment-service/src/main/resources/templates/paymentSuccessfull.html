@@ -1,12 +1,20 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Hello</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:utext="${style}">
+    <title>Payment</title>
 </head>
 <body>
-<h1>Youre payment was successfull</h1>
-<a href="#">Home page</a>
-<!-- TODO: return home link-->
+<div th:utext="${header}"></div>
+
+<img alt="" class="backImage" src="" th:src="@{/images/severka.jpg}">
+<div class="container-fluid p-5 text-center">
+    <div class="myCard row mb-3 mt-5 mx-auto w-25 d-flex align-items-center justify-content-center p-5">
+        <h1 class="text-white">Youre payment was successfull</h1>
+        <a href="http://localhost:8006/">
+            <button class="btn btn-primary mt-4" type="submit">Home</button>
+        </a>
+    </div>
+</div>
 
 </body>
 </html>

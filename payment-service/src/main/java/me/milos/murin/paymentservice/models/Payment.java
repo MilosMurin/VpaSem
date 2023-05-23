@@ -1,13 +1,11 @@
 package me.milos.murin.paymentservice.models;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-@JsonFilter("myFilter")
 public class Payment {
 
     @Id
