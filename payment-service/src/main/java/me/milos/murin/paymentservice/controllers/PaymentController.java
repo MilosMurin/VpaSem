@@ -51,11 +51,14 @@ public class PaymentController {
         }
 
         if (payment.isPresent()) {
+            ViewRetriever vr = new ViewRetriever(webClientBuilder);
+            vr.loadToModel(model, "Pay");
+            model.addAttribute("amount", payment.get().getSum().toString() + "€");
+            model.addAttribute("id", "/pay/" + id);
             if (!payment.get().getPaid()) {
-                ViewRetriever vr = new ViewRetriever(webClientBuilder);
-                vr.loadToModel(model, "Pay");
-                model.addAttribute("amount", payment.get().getSum().toString() + "€");
                 return new ModelAndView("payment");
+            } else {
+                return new ModelAndView("paymentAlreadyDone");
             }
         }
 

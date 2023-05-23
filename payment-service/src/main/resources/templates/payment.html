@@ -8,6 +8,46 @@
 
 <img alt="" class="backImage" src="" th:src="@{/images/severka.jpg}">
 
+<div class="container-fluid text-center">
+    <div class="mt-5 row d-flex align-items-center justify-content-center">
+        <div class="col-6 d-flex align-items-center justify-content-center">
+            <div class="myCard mb-3 mt-5 w-75 p-5 text-white">
+                <h1>Total is: <span th:text="${amount}"></span></h1>
+                <form method="post" th:action="${id}">
+                    <div class="row mt-4">
+                        <div class="col text-end">
+                            <label for="cardNumber">Number:</label>
+                        </div>
+                        <div class="col text-start">
+                            <input id="cardNumber" name="cardNumber" th:value="${cardNumber}" type="text"/>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-4">
+                        <div class="col text-end">
+                            <label for="expiration">Expiration:</label>
+                        </div>
+                        <div class="col text-start">
+                            <input id="expiration" name="expiration" th:value="${expiration}" type="month"/>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col text-end">
+                            <label for="cvv">CVV:</label>
+                        </div>
+                        <div class="col text-start">
+                            <input id="cvv" name="cvv" th:value="${cvv}" type="number"/>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-warning mt-4" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--<h1 th:text="You need to pay ${amount}"></h1>-->
 <!--TODO: meka a form here-->
 

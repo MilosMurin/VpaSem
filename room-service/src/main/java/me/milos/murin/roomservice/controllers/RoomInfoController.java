@@ -45,7 +45,6 @@ public class RoomInfoController {
         loadToModel(model, "rooms", "Rooms");
         ArrayList<Room> rooms = (ArrayList<Room>) roomRepository.findAll();
         model.addAttribute("rooms", rooms);
-        // TODO: List of all rooms with button to reserve
         model.addAttribute("number", "0");
         return "roomList";
     }
