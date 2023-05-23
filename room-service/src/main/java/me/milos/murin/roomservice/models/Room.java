@@ -34,6 +34,11 @@ public class Room {
         return roomType;
     }
 
+
+    public String getRedirectURL() {
+        return "http://localhost:8003/room/" + id;
+    }
+
     @Override
     public String toString() {
         return String.format("Room no. %d: %d", id, roomType.getId());

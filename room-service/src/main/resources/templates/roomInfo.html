@@ -1,43 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Room info 212</title>
-    <link href="../css/bootstrap.min.css" media="screen" rel="stylesheet"
-          th:href="@{/resources/css/bootstrap.min.css}"/>
+<head th:utext="${style}">
+    <title>Room info</title>
 </head>
 <body>
-<div th:replace="fragments/header :: header">
-    <!-- ============================================================================ -->
-    <!-- This content is only used for static prototyping purposes (natural templates)-->
-    <!-- and is therefore entirely optional, as this markup fragment will be included -->
-    <!-- from "fragments/header.html" at runtime.                                     -->
-    <!-- ============================================================================ -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Static header</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                </ul>
+<div th:utext="${header}"></div>
+
+
+<img alt="" class="backImage" src="" th:if="${room.getName() == 'Apartment'}" th:src="@{/images/apartman.jpg}">
+<img alt="" class="backImage" src="" th:if="${room.getName() == 'Double'}" th:src="@{/images/double.jpg}">
+<img alt="" class="backImage" src="" th:if="${room.getName() == 'Double extra'}" th:src="@{/images/doubleExtra.jpg}">
+<img alt="" class="backImage" src="" th:if="${room.getName() == 'Family'}" th:src="@{/images/family.jpg}">
+
+<div class="container-fluid text-center">
+    <div class="mt-5 row d-flex align-items-center justify-content-center">
+        <div class="col-6 d-flex align-items-center justify-content-center">
+            <div class="myCard mb-3 mt-5 w-75 p-5 text-white">
+                <h1>Room <span th:text="${num}"></span></h1>
+                <h2><span th:text="${room.getName()}"></span></h2>
+                <h3><span class="text-warning" th:text="${room.getPriceString()}"></span></h3>
+                <h3>Beds: <span th:text="${room.getBedsString()}"></span></h3>
+                <p>Info: <span th:text="${room.getInfo()}"></span></p>
+                <a href="http://localhost:8006/">
+                    <!--                    TODO: link to reserve this-->
+                    <button class="btn btn-primary mt-4" type="submit">Reserve</button>
+                </a>
             </div>
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="hero-unit">
-        <h1>Test</h1>
-        <p>
-            Welcome to the Spring MVC Quickstart application!
-            Get started quickly by signing up.
-        </p>
-        <p>
-            <a class="btn btn-large btn-success" href="/signup" th:href="@{/signup}">Sign up</a>
-        </p>
-    </div>
-</div>
-
 </body>
 </html>

@@ -32,7 +32,7 @@ public class PostController {
             } else {
                 return "No room type with the give id!";
             }
-            return "Saved a new roomtype";
+            return "Saved a new room";
         } catch (NumberFormatException e) {
             return "Failed to create a room type from the parameters give.";
         } catch (Exception e) {

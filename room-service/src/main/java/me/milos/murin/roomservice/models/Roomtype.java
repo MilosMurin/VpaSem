@@ -67,6 +67,14 @@ public class Roomtype {
         return name;
     }
 
+    public String getPriceString() {
+        return String.format("%d€/night", getPrice());
+    }
+
+    public String getBedsString() {
+        return String.format("%d + %d", getBedAmount(), getExtraBeds());
+    }
+
     @Override
     public String toString() {
         return String.format("%d: %s, %d beds + %d extra, %dm2 for %d€", id, name, bedAmount, extraBeds, size, price);

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:utext="${style}">
+    <title>Room info</title>
+</head>
+<body style="overflow: auto;">
+<div th:utext="${header}"></div>
+
+<img alt="" class="backImage" src="" th:src="@{/images/severka.jpg}">
+<div class="container-fluid text-center">
+    <div class="col">
+        <div class="myCard mx-auto row mb-3 mt-5 w-75 d-flex align-items-center justify-content-center p-5 text-white">
+            <table>
+                <tr>
+                    <th>No.</th>
+                    <th>Type</th>
+                    <th>Beds</th>
+                    <th>Price</th>
+                    <th>Check out</th>
+                </tr>
+                <tr class="pt-2" th:each="room : ${rooms}">
+                    <td th:text="${room.getId()}"></td>
+                    <td th:text="${room.getRoomType().getName()}"></td>
+                    <td th:text="${room.getRoomType().getBedsString()}"></td>
+                    <td th:text="${room.getRoomType().getPriceString()}"></td>
+                    <td>
+                        <a href="" th:href="${room.getRedirectURL()}">
+                            <button class="btn btn-primary" type="submit">Check out</button>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
